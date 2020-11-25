@@ -52,13 +52,12 @@ def delete(request, num):
     return render(request, 'hello/delete.html', params)
 
 def find(request):
-    if(request.method == 'POST'):
+    if (request.method == 'POST'):
         msg = 'search result:'
         form = FindForm(request.POST)
         str = request.POST['find']
-        val = str.split()
-        data = Friend.objects.filter(Q(name__contains=str)\
-            |Q(mail__contains=str))
+        list = str.split()
+        data = Friend.objects.filter(name__in=list)
     else:
         msg = 'search words...'
         form = FindForm()
